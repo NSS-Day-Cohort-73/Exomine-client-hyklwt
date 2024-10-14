@@ -8,6 +8,7 @@ export const getTransientState = () => {
     return transientState
 }
 
+
 export const setGovernorId = (governorId) => {
     state.selectedGovernor = governorId
     document.dispatchEvent(new CustomEvent("stateChanged"))
@@ -39,5 +40,5 @@ export const purchaseMineral = () => {
 
 
 
-    document.dispatchEvent(new CustomEvent("stateChanged"))
+//     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
