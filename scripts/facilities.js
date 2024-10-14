@@ -1,4 +1,6 @@
+import { facilityMinerals } from './facilitymineral.js'
 import { setFacilityId } from './TransientState.js'
+
 
 export const facilityDropdown = async () => {
     const response = await fetch("http://localhost:8088/facilities")
@@ -8,7 +10,7 @@ export const facilityDropdown = async () => {
 
     return `
         <div>
-            <select id="facility">
+            <select name="facility">
                 <option value="0">Please Choose a facility</option>
                     ${data.map(facility =>
                         `<option value="${facility.id}">${facility.name}</option>`
@@ -20,8 +22,9 @@ export const facilityDropdown = async () => {
 
 //needs setFacilityId... I put these in my transState module in the last project
 export const handleFacilityChoice = (changeEvent) => {
-    if (changeEvent.target.id === "facility") {
+    if (changeEvent.target.name === "facility") {
         const convertedToInteger = (parseInt(changeEvent.target.value))
         setFacilityId(convertedToInteger)
+        facilityMinerals(convertedToInteger)
     }
 }
