@@ -1,4 +1,4 @@
-
+import { setFacilityId } from './TransientState.js'
 
 export const facilityDropdown = async () => {
     const response = await fetch("http://localhost:8088/facilities")
