@@ -11,12 +11,12 @@ const render = async () => {
         GOVERNOR_PANEL_HTML,
         FACILITY_PANEL_HTML,
         FACILITY_MINERALS_HTML,
-        SPACE_CART_HTML,
+        SPACE_CART_HTML
     ] = await Promise.all([
         governorDropdown(),
         facilityDropdown(),
         facilityMinerals(),
-        spaceCart(),
+        spaceCart()
     ])
 
     container.innerHTML = `
@@ -25,16 +25,19 @@ const render = async () => {
         </header>
         <article id="governor-panel">
             ${GOVERNOR_PANEL_HTML}
+        <section class="governorsColony-panel"
+        
+        </section>
         </article>
         <article id="facility-panel">
-            ${FACILITY_PANEL_HTML}
+            
         </article>
         <article id="cart-panel">
             <section id="facility-minerals">
-                ${FACILITY_MINERALS_HTML}
+                
             </section>
             <section id="space-cart">
-                ${SPACE_CART_HTML}
+                
             </section>
         </article>
     `

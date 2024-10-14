@@ -1,5 +1,5 @@
-//I DONT THINK WE'LL NEED THIS import { setGovernor } from "./TransientState.js"
-import { displayGovernorColony } from "./governorsColony.js"
+import { setGovernor } from "./TransientState.js"
+import { DisplayGovernorColony } from "./governorsColony.js"
 
 
 export const governorDropdown = async () => {
@@ -18,7 +18,6 @@ export const governorDropdown = async () => {
             <option 
             value="${item.id}" 
             active="${item.active}"
-            colonyId="${item.colonyId}"
             >${item.name}</option>
             `
 
@@ -33,10 +32,8 @@ export const governorDropdown = async () => {
 
 const handleGovernorChange = (changeEvent) => {
     if (changeEvent.target.name === "governor") {
-        const theGovernor = changeEvent.target.colonyId
-        //debugger for testing values
-        debugger
-        //passing the selected governor's colonyID to be displayed 
-        displayGovernorColony(theGovernor)
+        const theGovernorId = parseInt(changeEvent.target.value)
+        setGovernor(theGovernorId)
+        DisplayGovernorColony(theGovernorId)
     }
 }
