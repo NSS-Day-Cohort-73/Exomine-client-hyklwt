@@ -1,13 +1,35 @@
-const state = {
-
+const transientState = {
+    "selectedGovernor": 0,
+    "selectedFacility": 0,
+    "selectedMinerals": new Map(),
 }
 
-export const setFacility = (facilityId) => {
-    state.selectedFacility = facilityId
+export const getTransientState = () => {
+    return transientState
+}
+
+export const updateMinerals = (mineral) => {
+    transientState.selectedMinerals.set(mineral.facilityId, mineral.id)
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
-export const purchaseMineral = () => {
+export const setFacilityId = (facilityId) => {
+    transientState.selectedFacility = facilityId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+export const setGovernor = (governorId) => {
+    transientState.selectedGovernor = governorId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+
+
+
+
+
+
+// export const purchaseMineral = () => {
     /*
         Does the chosen governor's colony already own some of this mineral?
             - If yes, what should happen?
@@ -22,5 +44,5 @@ export const purchaseMineral = () => {
 
 
 
-    document.dispatchEvent(new CustomEvent("stateChanged"))
-}
+//     document.dispatchEvent(new CustomEvent("stateChanged"))
+// }
