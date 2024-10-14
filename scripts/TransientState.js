@@ -1,11 +1,28 @@
-const state = {
-
+const transientState = {
+    "selectedGovernor": 0,
+    "selectedFacility": 0,
+    "selectedMinerals": new Map(),
 }
 
-export const setFacility = (facilityId) => {
+export const getTransientState = () => {
+    return transientState
+}
+
+export const setGovernorId = (governorId) => {
+    state.selectedGovernor = governorId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+export const setFacilityId = (facilityId) => {
     state.selectedFacility = facilityId
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
+
+export const updateMinerals = (mineral) => {
+    transientState.selectedMinerals.set(mineral.facilityId, mineral.id)
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
 
 export const purchaseMineral = () => {
     /*
