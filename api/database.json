@@ -119,13 +119,13 @@
         "id": 1,
         "colonyId": 1,
         "mineralId": 1,
-        "amount": 0
+        "amount": 3
       },
       {
         "id": 2,
         "colonyId": 1,
         "mineralId": 2,
-        "amount": 0
+        "amount": 2
       },
       {
         "id": 3,
