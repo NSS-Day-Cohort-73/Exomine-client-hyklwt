@@ -6,12 +6,13 @@ export const facilityDropdown = async () => {
     const data = await response.json()
 
     document.addEventListener("change", handleFacilityChoice)
+    const activeFacilities = data.filter((item) => item.active === true)
 
     return `
         <div>
             <select name="facility">
                 <option value="0">Please Choose a facility</option>
-                    ${data.map(facility =>
+                    ${activeFacilities.map(facility =>
                         `<option value="${facility.id}">${facility.name}</option>`
                     ).join('')}
             </select>

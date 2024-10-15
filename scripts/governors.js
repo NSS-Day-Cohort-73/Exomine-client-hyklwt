@@ -6,9 +6,10 @@ export const governorDropdown = async () => {
     const governors = await res.json()
 
     document.addEventListener("change", handleGovernorChange)
+    const activeGovernors = governors.filter((item) => item.active === true)
 
     let html = '<select name="governor"><option value="0">Choose a governor...</option>'
-    const governorStringArray = governors.map(
+    const governorStringArray = activeGovernors.map(
         (item) => {
 
         //displaying the governor dropdown with all information attatched
