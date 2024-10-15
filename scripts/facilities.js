@@ -1,4 +1,3 @@
-import { facilityMinerals } from './facilitymineral.js'
 import { setFacilityId } from './TransientState.js'
 
 
@@ -23,8 +22,7 @@ export const facilityDropdown = async () => {
 //needs setFacilityId... I put these in my transState module in the last project
 export const handleFacilityChoice = (changeEvent) => {
     if (changeEvent.target.name === "facility") {
-        const convertedToInteger = (parseInt(changeEvent.target.value))
+        const convertedToInteger = parseInt(changeEvent.target.value)
         setFacilityId(convertedToInteger)
-        facilityMinerals(convertedToInteger)
     }
 }
