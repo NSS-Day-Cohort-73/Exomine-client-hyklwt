@@ -1,30 +1,30 @@
+import { getTransientState } from "./TransientState.js"
 
 
 
-export const DisplayGovernorColony = async (govId) => {
-    const govRes = await fetch("http://localhost:8088/governors")
-    const governors = await govRes.json()
+export const DisplayGovernorColony = async () => {
     const colRes = await fetch("http://localhost:8088/colonies")
     const colonies = await colRes.json()
+    const colMinRes = await fetch("http://localhost:8088/colonyMinerals?_expand=mineral")
+    const colonyMinerals = await colMinRes.json()
 
 
-    governors.map(
-        (item) => {
-            if (item.id === govId) {
-                const govColId = item.colonyId
-                colonies.map(
-                    (item) => {
-                        if (item.id === govColId) {
-                            return document.querySelector('.governorsColony-panel').innerHTML = `
-                            <div>
-                                <h2>${item.name} Minerals<h2>
-                            </div>
-                            `
-                        }
-                    }
-                )
-            }
-        }
-    )
+    const state = getTransientState()
 
+    if (state.selectedColony > 0) {
+        const selectedColony = colonies.find((colony) => colony.id === state.selectedColony)
+        const filteredColonyMinerals = colonyMinerals.filter((colMin) => colMin.colonyId === selectedColony.id && colMin.amount > 0)
+
+        let html = `<h2>${selectedColony.name}</h2>`
+
+        html += filteredColonyMinerals.map((colMin) => 
+            `<div>
+                ${colMin.amount} tons of ${colMin.mineral.name}
+            </div>`
+        ).join("")
+        
+        return html
+    } else {
+        return `<h2>Colony Minerals</h2>`
+    }
 }
