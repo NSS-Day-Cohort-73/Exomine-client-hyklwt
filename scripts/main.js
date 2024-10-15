@@ -1,7 +1,7 @@
 import { governorDropdown } from './governors.js'
 import { DisplayGovernorColony } from './governorsColony.js'
-// import { facilityDropdown } from './facilities.js'
-//import { facilityMinerals } from './facilityMineral.js'
+import { facilityDropdown } from './facilities.js'
+import { facilityMinerals } from './facilityMineral.js'
 //import { spaceCart } from './spaceCart.js'
 
 
@@ -11,14 +11,14 @@ const render = async () => {
     const [
         GOVERNOR_DROPDOWN_HTML,
         COLONY_MINERALS_HTML,
-        // FACILITY_PANEL_HTML,
-        // FACILITY_MINERALS_HTML,
+        FACILITY_PANEL_HTML,
+        FACILITY_MINERALS_HTML,
         // SPACE_CART_HTML,
     ] = await Promise.all([
         governorDropdown(),
-        DisplayGovernorColony()
-        // facilityDropdown(),
-        // facilityMinerals(),
+        DisplayGovernorColony(),
+        facilityDropdown(),
+        facilityMinerals(),
         // spaceCart(),
     ])
 
@@ -35,11 +35,11 @@ const render = async () => {
             </section>
         </article>
         <article id="facility-panel">
-
+                ${FACILITY_PANEL_HTML}
         </article>
         <article id="cart-panel">
             <section id="facility-minerals">
-  
+                ${FACILITY_MINERALS_HTML}
             </section>
             <section id="space-cart">
 
