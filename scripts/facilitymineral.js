@@ -23,7 +23,7 @@ export const facilityMinerals = async () => {
             `).join('')
     
             return `
-
+            <div>
                 <h3>${facilityName} Available Minerals</h3>
                 ${mineralOptionsHTML}
             </div>
