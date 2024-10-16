@@ -17,7 +17,11 @@ export const facilityDropdown = async () => {
                 <select name="facility">
                     <option value="0">Please Choose a facility</option>
                         ${activeFacilities.map(facility =>
-                            `<option value="${facility.id}">${facility.name}</option>`
+                            `<option 
+                             <option 
+                             ${state.selectedFacility===facility.id ? "selected" : ""}
+                            value="${facility.id}"
+                            >${facility.name}</option>`
                         ).join('')}
                 </select>
             </div>
