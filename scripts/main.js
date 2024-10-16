@@ -2,7 +2,7 @@ import { governorDropdown } from './governors.js'
 import { DisplayGovernorColony } from './governorsColony.js'
 import { facilityDropdown } from './facilities.js'
 import { facilityMinerals } from './facilitymineral.js'
-//import { spaceCart } from './spaceCart.js'
+import { spaceCart } from './spaceCart.js'
 
 
 const container = document.querySelector("#container")
@@ -13,13 +13,13 @@ const render = async () => {
         COLONY_MINERALS_HTML,
         FACILITY_PANEL_HTML,
         FACILITY_MINERALS_HTML,
-        // SPACE_CART_HTML,
+        SPACE_CART_HTML,
     ] = await Promise.all([
         governorDropdown(),
         DisplayGovernorColony(),
         facilityDropdown(),
         facilityMinerals(),
-        // spaceCart(),
+        spaceCart(),
     ])
 
     container.innerHTML = `
@@ -42,7 +42,7 @@ const render = async () => {
                 ${FACILITY_MINERALS_HTML}
             </section>
             <section id="space-cart">
-
+                ${SPACE_CART_HTML}
             </section>
         </article>
     `
