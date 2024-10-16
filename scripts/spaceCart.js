@@ -1,4 +1,4 @@
-import { getTransientState, resetMineral } from "./TransientState.js"
+import { getTransientState, resetMineral, purchaseMineral } from "./TransientState.js"
 
 
 export const spaceCart = async () => {
@@ -37,8 +37,8 @@ export const spaceCart = async () => {
 
 const handleButtonPress = (clickEvent) => {
     if(clickEvent.target.name === "cart") {
-        debugger
-        // purchaseMineral()
-        resetMineral()
+
+        purchaseMineral()
+        //resetMineral()
     }
 }

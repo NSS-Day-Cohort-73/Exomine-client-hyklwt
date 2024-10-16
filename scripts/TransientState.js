@@ -30,7 +30,7 @@ export const resetMineral = () => {
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
-export const purchaseMineral = () => {
+export const purchaseMineral = async () => {
     /*
         Does the chosen governor's colony already own some of this mineral?
             - If yes, what should happen?
@@ -42,8 +42,54 @@ export const purchaseMineral = () => {
 
         Only the foolhardy try to solve this problem with code.
     */
+    const colMinResponse = await fetch("http://localhost:8088/colonyMinerals")
+    const colonyMinerals = await colMinResponse.json()
+
+    const facMinRespose = await fetch("http://localhost:8088/facilityMinerals")
+    const facilityMinerals = await facMinRespose.json()
+    
+    const selectedColonyId = transientState.selectedColony
+    const selectedMineralId = transientState.selectedMineral
+    const selectedFacilityId = transientState.selectedFacility
+    
+    debugger
+    const selectedColMin = colonyMinerals.find(colMin => colMin.colonyId === selectedColonyId && colMin.mineralId === selectedMineralId)
+    selectedColMin.amount++
+    const selectedFacMin = facilityMinerals.find(facMin => facMin.facilityId === selectedFacilityId && facMin.mineralId === selectedMineralId)
+    selectedFacMin.amount--
+
+    // if governor's colony already owns some, make a PUT
+    if (selectedColMin) {
+        fetch(`http://localhost:8088/colonyMinerals/${selectedColMin.id}`, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(selectedColMin)
+        })
+        fetch(`http://localhost:8088/facilityMinerals/${selectedFacMin.id}`, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(selectedFacMin)
+        })
 
 
 
-//     document.dispatchEvent(new CustomEvent("stateChanged"))
+    // if they don't, make a POST
+
+    } // else {
+    //     fetch(`http://localhost:8088/colonyMinerals`, {
+    //         method: 'POST', 
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //             },
+    //         body: JSON.stringify(selectedColMin)
+    //     })
+    // }
+
+
+
+
 }
