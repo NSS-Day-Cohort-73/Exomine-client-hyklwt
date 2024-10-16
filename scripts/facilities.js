@@ -1,4 +1,4 @@
-import { setFacilityId } from './TransientState.js'
+import { getTransientState, setFacilityId } from './TransientState.js'
 
 
 export const facilityDropdown = async () => {
@@ -6,18 +6,31 @@ export const facilityDropdown = async () => {
     const data = await response.json()
 
     document.addEventListener("change", handleFacilityChoice)
-    const activeFacilities = data.filter((item) => item.active === true)
 
-    return `
-        <div>
-            <select name="facility">
-                <option value="0">Please Choose a facility</option>
-                    ${activeFacilities.map(facility =>
-                        `<option value="${facility.id}">${facility.name}</option>`
-                    ).join('')}
-            </select>
-        </div>
-    `
+    const state = getTransientState()
+    
+    if (state.selectedColony > 0) {   
+        const activeFacilities = data.filter((item) => item.active === true)
+
+        return `
+            <div>
+                <select name="facility">
+                    <option value="0">Please Choose a facility</option>
+                        ${activeFacilities.map(facility =>
+                            `<option value="${facility.id}">${facility.name}</option>`
+                        ).join('')}
+                </select>
+            </div>
+        `
+    } else {
+        return `
+            <div>
+                <select disabled="disabled" name="facility">
+                    <option value="0">Please Choose a facility</option>
+                </select>
+            </div>
+        `
+    }
 }
 
 //needs setFacilityId... I put these in my transState module in the last project

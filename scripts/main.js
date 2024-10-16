@@ -1,7 +1,7 @@
 import { governorDropdown } from './governors.js'
 import { DisplayGovernorColony } from './governorsColony.js'
 import { facilityDropdown } from './facilities.js'
-import { facilityMinerals } from './facilityMineral.js'
+import { facilityMinerals } from './facilitymineral.js'
 //import { spaceCart } from './spaceCart.js'
 
 
