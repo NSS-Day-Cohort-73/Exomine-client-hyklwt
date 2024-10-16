@@ -20,7 +20,7 @@ export const setFacility = (facilityId) => {
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
-export const updateMinerals = (mineralId) => {
+export const setMineral = (mineralId) => {
     transientState.selectedMineral = mineralId
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
