@@ -18,7 +18,6 @@ export const facilityDropdown = async () => {
                     <option value="0">Please Choose a facility</option>
                         ${activeFacilities.map(facility =>
                             `<option 
-                             <option 
                              ${state.selectedFacility===facility.id ? "selected" : ""}
                             value="${facility.id}"
                             >${facility.name}</option>`
