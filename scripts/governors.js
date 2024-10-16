@@ -1,4 +1,4 @@
-import { getTransientState, setColonyId } from "./TransientState.js"
+import { getTransientState, setGovernorColony } from "./TransientState.js"
 
 
 export const governorDropdown = async () => {
@@ -19,9 +19,10 @@ export const governorDropdown = async () => {
 
             return `
             <option ${
-                state.selectedColony===item.colonyId ? "selected" : ""
+                state.selectedGovernor===item.id ? "selected" : ""
             }
-            value="${item.colonyId}" 
+            value="${item.id}" 
+            data-colonyid="${item.colonyId}"
             active="${item.active}"
             >${item.name}</option>
             `
@@ -37,7 +38,8 @@ export const governorDropdown = async () => {
 
 const handleGovernorChange = (changeEvent) => {
     if (changeEvent.target.name === "governor") {
-        const theColonyId = parseInt(changeEvent.target.value)
-        setColonyId(theColonyId)
+        const theGovernorId = parseInt(changeEvent.target.value)
+        const theColonyId = parseInt(changeEvent.target[theGovernorId].dataset.colonyid)
+        setGovernorColony(theGovernorId, theColonyId)
     }
 }

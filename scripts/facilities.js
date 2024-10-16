@@ -1,4 +1,4 @@
-import { getTransientState, setFacilityId } from './TransientState.js'
+import { getTransientState, setFacility } from './TransientState.js'
 
 
 export const facilityDropdown = async () => {
@@ -37,6 +37,6 @@ export const facilityDropdown = async () => {
 export const handleFacilityChoice = (changeEvent) => {
     if (changeEvent.target.name === "facility") {
         const convertedToInteger = parseInt(changeEvent.target.value)
-        setFacilityId(convertedToInteger)
+        setFacility(convertedToInteger)
     }
 }
