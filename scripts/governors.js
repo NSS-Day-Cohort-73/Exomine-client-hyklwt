@@ -38,8 +38,9 @@ export const governorDropdown = async () => {
 
 const handleGovernorChange = (changeEvent) => {
     if (changeEvent.target.name === "governor") {
-        const theGovernorId = parseInt(changeEvent.target.value)
-        const theColonyId = parseInt(changeEvent.target[theGovernorId].dataset.colonyid)
+        const selectedOption = changeEvent.target.options[changeEvent.target.selectedIndex]
+        const theGovernorId = parseInt(selectedOption.value)
+        const theColonyId = parseInt(selectedOption.dataset.colonyid)
         setGovernorColony(theGovernorId, theColonyId)
     }
 }
