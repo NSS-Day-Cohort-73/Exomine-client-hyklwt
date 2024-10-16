@@ -15,15 +15,17 @@ export const facilityMinerals = async () => {
     
         // create html variable with the html made from the data in the new array
         const mineralOptionsHTML = facilityMinerals.map(entry => `
+            <div class="group-facility-radio">
             <label>
                 <input type="radio" name="mineral_${entry.id}" value="${entry.amount}"/>
                 ${entry.mineral.name} (${entry.amount} tons)
             </label>
+            </div>
             
             `).join('')
     
             return `
-            <div>
+            <div class="group-facility-min">
                 <h3>${facilityName} Available Minerals</h3>
                 ${mineralOptionsHTML}
             </div>
