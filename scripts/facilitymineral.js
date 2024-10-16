@@ -1,4 +1,4 @@
-import { getTransientState } from "./TransientState.js"
+import { getTransientState, setMineral } from "./TransientState.js"
 
 export const facilityMinerals = async () => {
     const response = await fetch("http://localhost:8088/facilityMinerals?_expand=mineral&_expand=facility")
@@ -7,6 +7,7 @@ export const facilityMinerals = async () => {
     //getting the current transient state
     const state = getTransientState()
 
+    document.addEventListener("change", handleMineralChange)
 
     if (state.selectedFacility > 0) {
         const selectedFacility = data.find(entry => entry.facilityId === state.selectedFacility)
@@ -17,7 +18,7 @@ export const facilityMinerals = async () => {
         const mineralOptionsHTML = facilityMinerals.map(entry => `
             <div class="group-facility-radio">
             <label>
-                <input type="radio" name="mineral_${entry.id}" value="${entry.amount}"/>
+                <input type="radio" name="mineral" value="${entry.mineralId}" ${ state.selectedMineral === entry.mineralId ? "checked" : "" }/>
                 ${entry.mineral.name} (${entry.amount} tons)
             </label>
             </div>
@@ -32,6 +33,13 @@ export const facilityMinerals = async () => {
             `
     } else {
         return `<h3>Available Minerals</h3>`
+    }
+}
+
+const handleMineralChange = (changeEvent) => {
+    if (changeEvent.target.name === "mineral") {
+        const theMineralId = parseInt(changeEvent.target.value)
+        setMineral(theMineralId)
     }
 }
 
