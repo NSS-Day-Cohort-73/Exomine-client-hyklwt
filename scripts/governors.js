@@ -1,4 +1,4 @@
-import { setColonyId } from "./TransientState.js"
+import { getTransientState, setGovernorColony } from "./TransientState.js"
 
 
 export const governorDropdown = async () => {
@@ -6,17 +6,23 @@ export const governorDropdown = async () => {
     const governors = await res.json()
 
     document.addEventListener("change", handleGovernorChange)
+
+    const state = getTransientState()
+
     const activeGovernors = governors.filter((item) => item.active === true)
 
     let html = '<select name="governor"><option value="0">Choose a governor...</option>'
     const governorStringArray = activeGovernors.map(
         (item) => {
 
-        //displaying the governor dropdown with all information attatched
+            //displaying the governor dropdown with all information attatched
 
             return `
-            <option 
-            value="${item.colonyId}" 
+            <option ${
+                state.selectedGovernor===item.id ? "selected" : ""
+            }
+            value="${item.id}" 
+            data-colonyid="${item.colonyId}"
             active="${item.active}"
             >${item.name}</option>
             `
@@ -32,7 +38,8 @@ export const governorDropdown = async () => {
 
 const handleGovernorChange = (changeEvent) => {
     if (changeEvent.target.name === "governor") {
-        const theColonyId = parseInt(changeEvent.target.value)
-        setColonyId(theColonyId)
+        const theGovernorId = parseInt(changeEvent.target.value)
+        const theColonyId = parseInt(changeEvent.target[theGovernorId].dataset.colonyid)
+        setGovernorColony(theGovernorId, theColonyId)
     }
 }
