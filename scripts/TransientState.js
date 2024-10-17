@@ -52,14 +52,16 @@ export const purchaseMineral = async () => {
     const selectedMineralId = transientState.selectedMineral
     const selectedFacilityId = transientState.selectedFacility
     
-    debugger
     const selectedColMin = colonyMinerals.find(colMin => colMin.colonyId === selectedColonyId && colMin.mineralId === selectedMineralId)
-    selectedColMin.amount++
+
     const selectedFacMin = facilityMinerals.find(facMin => facMin.facilityId === selectedFacilityId && facMin.mineralId === selectedMineralId)
     selectedFacMin.amount--
 
     // if governor's colony already owns some, make a PUT
     if (selectedColMin) {
+
+        selectedColMin.amount++
+
         fetch(`http://localhost:8088/colonyMinerals/${selectedColMin.id}`, {
             method: 'PUT', 
             headers: {
@@ -67,6 +69,7 @@ export const purchaseMineral = async () => {
                 },
             body: JSON.stringify(selectedColMin)
         })
+
         fetch(`http://localhost:8088/facilityMinerals/${selectedFacMin.id}`, {
             method: 'PUT', 
             headers: {
@@ -75,21 +78,30 @@ export const purchaseMineral = async () => {
             body: JSON.stringify(selectedFacMin)
         })
 
-
-
     // if they don't, make a POST
 
-    } // else {
-    //     fetch(`http://localhost:8088/colonyMinerals`, {
-    //         method: 'POST', 
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //             },
-    //         body: JSON.stringify(selectedColMin)
-    //     })
-    // }
+    } else {
+        const newColonyMineral = {
+            "colonyId": selectedColonyId,
+            "mineralId": selectedMineralId,
+            "amount": 1,
+        }
 
+        fetch(`http://localhost:8088/colonyMinerals`, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(newColonyMineral)
+        })
 
+        fetch(`http://localhost:8088/facilityMinerals/${selectedFacMin.id}`, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(selectedFacMin)
+        })
 
-
+    }
 }
