@@ -102,3 +102,9 @@ If anyone on the team is unsure about any of these questions, it leads to uncert
 **Do not attempt the stretch goal until you have completed the basic requirements above.**
 
 If your team would like to do more advanced state manipulations, refactor your code to allow a governor to select minerals from multiple mining facilities before finalizing the purchase. A working example done by a previous team can be seen at [https://solar-mine.onrender.com/](https://solar-mine.onrender.com/). 
+
+![1st SequenceDiagram](./images/image1.png)
+![2nd SequenceDiagram](./images/image2.png)
+![3rd SequenceDiagram](./images/image3.png)
+![4th SequenceDiagram](./images/image4.png)
+![5th SequenceDiagram](./images/image5.png)
