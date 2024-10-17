@@ -8,19 +8,19 @@ export const spaceCart = async () => {
     document.addEventListener("click", handleButtonPress)
 
     const state = getTransientState()
-    const selectedMineral = state.selectedMineral
-    const selectedFacility = state.selectedFacility
+    const selectedMineralId = state.selectedMineral
+    const selectedFacilityId = state.selectedFacility
 
     const selectedFacMin = facilityMinerals.find((facMin) => 
-        facMin.facilityId === selectedFacility && facMin.mineralId === selectedMineral
+        facMin.facilityId === selectedFacilityId && facMin.mineralId === selectedMineralId
     )
 
-    if (state.selectedMineral === 0) {
+    if (selectedMineralId === 0) {
 
     
         let html = `<h2>Space Cart</h2>`
 
-        html += `<button name="cart" active="false">Purchase Mineral</button>`
+        html += `<button name="cart" disabled="true">Purchase Mineral</button>`
 
         return html
     } else {
@@ -35,10 +35,10 @@ export const spaceCart = async () => {
     }
 }
 
-const handleButtonPress = (clickEvent) => {
+const handleButtonPress = async (clickEvent) => {
     if(clickEvent.target.name === "cart") {
 
-        purchaseMineral()
-        //resetMineral()
+        await purchaseMineral()
+        resetMineral()
     }
 }

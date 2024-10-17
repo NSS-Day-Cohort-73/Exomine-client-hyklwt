@@ -1,4 +1,4 @@
-import { getTransientState, setFacility } from './TransientState.js'
+import { getTransientState, resetMineral, setFacility } from './TransientState.js'
 
 
 export const facilityDropdown = async () => {
@@ -41,5 +41,6 @@ export const handleFacilityChoice = (changeEvent) => {
     if (changeEvent.target.name === "facility") {
         const convertedToInteger = parseInt(changeEvent.target.value)
         setFacility(convertedToInteger)
+        resetMineral()
     }
 }

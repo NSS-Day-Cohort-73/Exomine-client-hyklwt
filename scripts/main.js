@@ -8,19 +8,25 @@ import { spaceCart } from './spaceCart.js'
 const container = document.querySelector("#container")
 
 const render = async () => {
-    const [
-        GOVERNOR_DROPDOWN_HTML,
-        COLONY_MINERALS_HTML,
-        FACILITY_PANEL_HTML,
-        FACILITY_MINERALS_HTML,
-        SPACE_CART_HTML,
-    ] = await Promise.all([
-        governorDropdown(),
-        DisplayGovernorColony(),
-        facilityDropdown(),
-        facilityMinerals(),
-        spaceCart(),
-    ])
+    // const [
+    //     GOVERNOR_DROPDOWN_HTML,
+    //     COLONY_MINERALS_HTML,
+    //     FACILITY_PANEL_HTML,
+    //     FACILITY_MINERALS_HTML,
+    //     SPACE_CART_HTML,
+    // ] = await Promise.all([
+    //     governorDropdown(),
+    //     DisplayGovernorColony(),
+    //     facilityDropdown(),
+    //     facilityMinerals(),
+    //     spaceCart(),
+    // ])
+
+    const GOVERNOR_DROPDOWN_HTML = await governorDropdown()
+    const COLONY_MINERALS_HTML = await DisplayGovernorColony()
+    const FACILITY_PANEL_HTML = await facilityDropdown()
+    const FACILITY_MINERALS_HTML = await facilityMinerals()
+    const SPACE_CART_HTML = await spaceCart()
 
     container.innerHTML = `
         <header>
